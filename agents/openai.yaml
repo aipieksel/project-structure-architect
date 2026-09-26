@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Structure Architect"
+  short_description: "Analyze and deeply organize repositories"
+  default_prompt: "Use $project-structure-architect with preview=ask and first show all three options: A. Review the plan first; B. Audit and apply the reorganization; C. Audit, show the plan, then apply the reorganization automatically without approval."
