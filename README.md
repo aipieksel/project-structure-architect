@@ -1,22 +1,14 @@
-# Project Structure Architect Skill
+# Project Structure Architect
 
 Maintained by [aipieksel](https://github.com/aipieksel). Upstream credits and licenses remain with their respective authors.
 
-A reusable repository-analysis and reorganization skill for converging software projects toward a clean architecture centered on:
+Project Structure Architect is a Codex skill for making an existing repository easier to navigate and maintain. It inspects the real application, build configuration, data paths, tests, and documentation before proposing or performing a folder reorganization. Its target structure separates application behavior, UI, entry points, database artifacts, configuration, and durable project documents.
 
-- `app/business` — what the product does;
-- `app/view` — what users see and interact with;
-- `app/entry` — framework/runtime entry points;
-- `db` — migrations, seeds, snapshots, and database artifacts;
-- `documents/documentation` — current/stable documentation and documentation-system state;
-- `documents/tasks` — task planning, task-system configuration, evidence, helpers, and lessons;
-- `documents/research`, `documents/audits`, `documents/reports`, etc. — other durable project knowledge;
-- `config` — relocatable tool/build/test/deployment configuration;
-- minimal root files.
+The skill works within the current repository. It does not change the product's stack or behavior to make folders look tidy. A successful run accounts for imports, build and deployment paths, active services, documentation links, and verification before calling the reorganization complete.
 
-The skill is intentionally stack-agnostic. It analyzes the actual languages, frameworks, package manifests, imports, ORM/runtime usage, generated code, build/deploy configuration, tests, and framework constraints before proposing moves.
+Its target separates `app/business`, `app/view`, and `app/entry`, with `db/` for data artifacts, `config/` for relocatable configuration, and `documents/` for durable project knowledge. These are targets to assess against the actual stack, not folders to impose blindly.
 
-## Strict architecture and completion
+## Architecture and completion
 
 Preserve the monorepo while organizing each application's responsibilities. Read the [mandatory conformance contract](references/conformance-and-completion.md) and [monorepo example](examples/monorepo-dashboard-workflow.md). Production logic under scripts/shared must be classified, exceptions need exact technical evidence, root shims need named consumers, and active services require sequencing rather than automatic exemptions. Final reports reconcile every target row and cannot claim completion with required moves, activation or verification pending.
 
@@ -76,19 +68,9 @@ Treat the guard as an extra check, not a substitute for compiler/linter/test val
 
 The skill treats installed skills, agent instructions, task helpers, package scripts, CI, generators, and source literals as filesystem dependencies. If a project moves documentation/task directories, the final report must list every affected skill and whether it was updated. The included `examples/skills-document-path-audit.md` shows this against the supplied sample skill corpus.
 
-## Companion project suite
+## Boundaries
 
-These standalone skills share the same project namespace without depending on one another:
-
-- `$project-documentation-builder` creates or comprehensively restructures `documents/documentation/**` and writes build evidence under `documents/tasks/documentation/build/**`.
-- `$project-documentation-updater` performs focused maintenance and writes update evidence under `documents/tasks/documentation/update/**`.
-- `$project-development-planner` creates an implementation-ready plan under `documents/tasks/development/**` without changing application code.
-- `$project-development-plan-criticizer` audits and revises that same plan record against project evidence.
-- `$project-development-plan-executor` implements and verifies a ready plan using the same record.
-
-The architect should preserve these internal contracts when it encounters them. It may normalize legacy parent roots into `documents/**`, but it must not silently redesign the companion systems during unrelated repository cleanup.
-
-For browser-visible verification, follow the target project's policy. Ego Browser is recommended when it is installed and authorized. It is not required for repository analysis or checks that have no browser-visible claim.
+When a target project uses agent skills or task tooling, their file paths are part of the migration inventory. The architect accounts for those consumers without redesigning their workflows. Browser-visible outcomes require the target project's browser verification policy; a file inventory alone cannot prove a rendered result.
 
 ## Installation and rights
 
